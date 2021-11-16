@@ -1,0 +1,39 @@
+build:
+  maxIssues: 5
+  weights:
+    formatting: 6 # maxIssues + 1 so formatting issues will always fail
+
+complexity:
+  ComplexMethod:
+    ignoreSingleWhenExpression: true
+
+empty-blocks:
+  EmptyFunctionBlock:
+    active: false
+
+exceptions:
+  TooGenericExceptionCaught:
+    active: false
+
+formatting:
+  android: true
+  ImportOrdering:
+    active: true
+  FinalNewline:
+    insertFinalNewLine: false
+  PackageName:
+    active: false
+  ParameterListWrapping:
+    indentSize: 2
+
+naming:
+  ConstructorParameterNaming:
+    excludeClassPattern: '.*Entity$'
+  PackageNaming:
+    active: false
+
+style:
+  MagicNumber:
+    active: false
+  NewLineAtEndOfFile:
+    active: false
