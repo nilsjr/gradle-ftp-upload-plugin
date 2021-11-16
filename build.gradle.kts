@@ -1,11 +1,9 @@
 plugins {
-  kotlin("jvm") version "1.5.31"
+  kotlin("jvm") version "1.6.0"
   `kotlin-dsl`
   `java-gradle-plugin`
-
   `maven-publish`
   id("com.gradle.plugin-publish") version "0.17.0"
-
   id("com.github.ben-manes.versions") version "0.39.0"
   id("io.gitlab.arturbosch.detekt") version Versions.detekt
 }
@@ -16,7 +14,6 @@ version = "0.0.1"
 repositories {
   mavenCentral()
 }
-configureDetekt("src/main/kotlin")
 dependencies {
   implementation(Deps.sshj)
 }
@@ -32,26 +29,24 @@ java {
 tasks.withType<GenerateModuleMetadata> {
   enabled = false
 }
-fun Project.configureDetekt(vararg paths: String) {
-  extensions.configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
-    toolVersion = Versions.detekt
-    source = files(paths)
-    parallel = true
-    config = files("$rootDir/detekt-config.yml")
-    buildUponDefaultConfig = true
-    ignoreFailures = false
-    reports {
-      xml {
-        enabled = true
-        destination = file("$buildDir/reports/detekt/detekt.xml")
-      }
-      html.enabled = false
-      txt.enabled = true
+configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
+  toolVersion = Versions.detekt
+  source = files("src/main/kotlin")
+  parallel = true
+  config = files("$rootDir/detekt-config.yml")
+  buildUponDefaultConfig = true
+  ignoreFailures = false
+  reports {
+    xml {
+      enabled = true
+      destination = file("$buildDir/reports/detekt/detekt.xml")
     }
+    html.enabled = false
+    txt.enabled = true
   }
-  dependencies {
-    "detektPlugins"(Plugins.detektFormatting)
-  }
+}
+dependencies {
+  "detektPlugins"(Plugins.detektFormatting)
 }
 
 // publish task: publishPlugins -Pgradle.publish.key=key -Pgradle.publish.secret=secret

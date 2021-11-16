@@ -1,2 +1,2 @@
-rootProject.name = "gradle-ftp-uploader"
+rootProject.name = "gradle-ftp-upload-plugin"
 
