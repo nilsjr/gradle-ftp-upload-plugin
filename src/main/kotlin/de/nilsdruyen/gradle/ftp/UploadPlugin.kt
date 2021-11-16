@@ -1,15 +1,15 @@
-package de.nilsdruyen.gradle.ftpuploader
+package de.nilsdruyen.gradle.ftp
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.register
 
-class FTPUploadPlugin : Plugin<Project> {
+class UploadPlugin : Plugin<Project> {
 
   override fun apply(target: Project) {
-    val extension = target.extensions.create<FTPUploadExtension>("ftpUpload")
-    target.tasks.register<FTPUploadTask>("uploadFiles") {
+    val extension = target.extensions.create<UploadExtension>("ftpUploadExtension")
+    target.tasks.register<UploadTask>("uploadFilesToFtp") {
       group = "deployment"
       description = "Upload files to ftp server"
 

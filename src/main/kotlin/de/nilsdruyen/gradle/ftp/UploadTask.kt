@@ -1,4 +1,4 @@
-package de.nilsdruyen.gradle.ftpuploader
+package de.nilsdruyen.gradle.ftp
 
 import net.schmizz.sshj.SSHClient
 import net.schmizz.sshj.sftp.SFTPClient
@@ -10,7 +10,7 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
 import java.io.File
 
-abstract class FTPUploadTask : DefaultTask() {
+abstract class UploadTask : DefaultTask() {
 
   @get:Input
   abstract val host: Property<String>

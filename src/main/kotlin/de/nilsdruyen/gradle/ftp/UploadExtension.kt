@@ -1,6 +1,6 @@
-package de.nilsdruyen.gradle.ftpuploader
+package de.nilsdruyen.gradle.ftp
 
-open class FTPUploadExtension {
+open class UploadExtension {
   var host = ""
   var port = 22
   var username = ""

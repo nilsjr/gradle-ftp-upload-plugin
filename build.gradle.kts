@@ -1,5 +1,5 @@
 plugins {
-  kotlin("jvm") version "1.6.0"
+  kotlin("jvm") version "1.5.31"
   `kotlin-dsl`
   `java-gradle-plugin`
   `maven-publish`
@@ -18,9 +18,9 @@ dependencies {
   implementation(Deps.sshj)
 }
 gradlePlugin {
-  plugins.register("ftp-uploader") {
-    id = "de.nilsdruyen.gradle-ftp-uploader"
-    implementationClass = "de.nilsdruyen.gradle.ftpuploader.FTPUploadPlugin"
+  plugins.register("ftpUploadPlugin") {
+    id = "de.nilsdruyen.gradle-ftp-upload-plugin"
+    implementationClass = "de.nilsdruyen.gradle.ftp.UploadPlugin"
   }
 }
 java {
@@ -50,18 +50,18 @@ dependencies {
 }
 
 // publish task: publishPlugins -Pgradle.publish.key=key -Pgradle.publish.secret=secret
-//pluginBundle {
-//  website = "https://github.com/nanogiants/android-versioning/"
-//  vcsUrl = "https://github.com/nanogiants/android-versioning"
-//  description = "Gradle plugin to automatically generate Android versionName and versionCode using Git."
-//  tags = listOf("versioning", "android", "artifact", "version")
-//  (plugins) {
-//    "versioningPlugin" {
-//      displayName = "Android Versioning Gradle Plugin"
-//    }
-//  }
-//  mavenCoordinates {
-//    groupId = "de.nanogiants"
-//    artifactId = "android-versioning"
-//  }
-//}
+pluginBundle {
+  website = "https://github.com/nilsjr/gradle-ftp-upload-plugin"
+  vcsUrl = "https://github.com/nilsjr/gradle-ftp-upload-plugin"
+  description = "Gradle plugin for uploading files to ftp server"
+  tags = listOf("upload", "ftp", "file", "files")
+  (plugins) {
+    "ftpUploadPlugin" {
+      displayName = "FTP Upload Gradle Plugin"
+    }
+  }
+  mavenCoordinates {
+    groupId = "de.nilsdruyen"
+    artifactId = "gradle-ftp-upload-plugin"
+  }
+}
