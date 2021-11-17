@@ -36,8 +36,8 @@ abstract class UploadTask : DefaultTask() {
     if (root.exists()) {
       val uploader = FTPUploader(host.get(), port.get(), username.get(), password.get(), targetDir.get())
       try {
-        root.listFiles()?.let {
-          uploader.upload(it.toList())
+        root.listFiles()?.toList()?.let {
+          uploader.rootUpload(it)
         }
       } finally {
         uploader.disconnect()
@@ -47,10 +47,16 @@ abstract class UploadTask : DefaultTask() {
     }
   }
 
-  class FTPUploader(host: String, port: Int, username: String, password: String, val targetDir: String) {
+  class FTPUploader(
+    host: String,
+    port: Int,
+    username: String,
+    password: String,
+    private val targetDir: String
+  ) {
 
     private val ssh = SSHClient()
-    private val client: SFTPClient
+    val client: SFTPClient
 
     init {
       ssh.loadKnownHosts()
@@ -61,11 +67,25 @@ abstract class UploadTask : DefaultTask() {
     }
 
     @Throws(IllegalStateException::class)
-    fun upload(files: List<File>) {
+    fun rootUpload(files: List<File>) {
       client.use {
-        files.forEach { file ->
-          println("Upload ${file.name}")
-          it.put(FileSystemFile(file), targetDir)
+        upload(files, targetDir, it)
+      }
+    }
+
+    @Throws(IllegalStateException::class)
+    fun upload(files: List<File>, dir: String, client: SFTPClient) {
+      files.forEach { file ->
+        if (file.isFile) {
+          println("Upload ${file.path} - ${file.name}")
+          println("to $dir - ${file.name}")
+          client.put(FileSystemFile(file), dir)
+        } else if (file.isDirectory) {
+          println("Create dir ${file.name}")
+          client.mkdirs("$dir/${file.name}")
+          file.listFiles()?.toList()?.let {
+            upload(it, "$dir/${file.name}", client)
+          }
         }
       }
     }
