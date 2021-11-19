@@ -1,10 +1,10 @@
 plugins {
-  kotlin("jvm") version "1.5.31"
+  kotlin("jvm") version Versions.kotlin
   `kotlin-dsl`
   `java-gradle-plugin`
   `maven-publish`
-  id("com.gradle.plugin-publish") version "0.17.0"
-  id("com.github.ben-manes.versions") version "0.39.0"
+  id("com.gradle.plugin-publish") version Versions.gradlePublish
+  id("com.github.ben-manes.versions") version Versions.benManesVersions
   id("io.gitlab.arturbosch.detekt") version Versions.detekt
 }
 
