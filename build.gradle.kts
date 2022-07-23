@@ -4,6 +4,7 @@ import io.gitlab.arturbosch.detekt.Detekt
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
   alias(libs.plugins.kotlin.jvm)
+  `kotlin-dsl`
   `java-gradle-plugin`
   `maven-publish`
   alias(libs.plugins.gradle.publish)
@@ -12,7 +13,7 @@ plugins {
 }
 
 group = "de.nilsdruyen"
-version = "0.0.3"
+version = "0.1.0"
 
 repositories {
   mavenCentral()
