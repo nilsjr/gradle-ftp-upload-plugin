@@ -4,7 +4,6 @@ import io.gitlab.arturbosch.detekt.Detekt
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
   alias(libs.plugins.kotlin.jvm)
-  `kotlin-dsl`
   `java-gradle-plugin`
   `maven-publish`
   alias(libs.plugins.gradle.publish)
@@ -22,9 +21,14 @@ dependencies {
   implementation(libs.hierynomusssh)
   add("detektPlugins", libs.misc.detektFormatting)
 }
+
 java {
   withSourcesJar()
+  withJavadocJar()
+  sourceCompatibility = JavaVersion.VERSION_1_8
+  targetCompatibility = JavaVersion.VERSION_1_8
 }
+
 tasks.withType<GenerateModuleMetadata> {
   enabled = false
 }
@@ -55,7 +59,7 @@ configure<DetektExtension> {
   ignoreFailures = false
 }
 
-tasks.withType<Detekt> {
+tasks.withType<Detekt>().configureEach {
   reports {
     xml {
       required.set(true)
