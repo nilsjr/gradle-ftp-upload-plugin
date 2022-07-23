@@ -56,7 +56,7 @@ abstract class UploadTask : DefaultTask() {
   ) {
 
     private val ssh = SSHClient()
-    val client: SFTPClient
+    private val client: SFTPClient
 
     init {
       ssh.loadKnownHosts()

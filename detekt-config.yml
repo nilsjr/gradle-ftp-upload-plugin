@@ -17,6 +17,8 @@ exceptions:
 
 formatting:
   android: true
+  Indentation:
+    active: false
   ImportOrdering:
     active: true
   FinalNewline:

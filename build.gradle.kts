@@ -1,11 +1,14 @@
+import io.gitlab.arturbosch.detekt.extensions.DetektExtension
+
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-  kotlin("jvm") version Versions.kotlin
+  alias(libs.plugins.kotlin.jvm)
   `kotlin-dsl`
   `java-gradle-plugin`
   `maven-publish`
-  id("com.gradle.plugin-publish") version Versions.gradlePublish
-  id("com.github.ben-manes.versions") version Versions.benManesVersions
-  id("io.gitlab.arturbosch.detekt") version Versions.detekt
+  alias(libs.plugins.gradle.publish)
+  alias(libs.plugins.misc.gradleVersions)
+  alias(libs.plugins.misc.detekt)
 }
 
 group = "de.nilsdruyen"
@@ -15,7 +18,8 @@ repositories {
   mavenCentral()
 }
 dependencies {
-  implementation(Deps.sshj)
+  implementation(libs.hierynomusssh)
+  add("detektPlugins", libs.misc.detektFormatting)
 }
 gradlePlugin {
   plugins.register("ftpUploadPlugin") {
@@ -29,8 +33,8 @@ java {
 tasks.withType<GenerateModuleMetadata> {
   enabled = false
 }
-configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
-  toolVersion = Versions.detekt
+configure<DetektExtension> {
+  toolVersion = rootProject.libs.versions.detekt.get()
   source = files("src/main/kotlin")
   parallel = true
   config = files("$rootDir/detekt-config.yml")
@@ -44,9 +48,6 @@ configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
     html.enabled = false
     txt.enabled = true
   }
-}
-dependencies {
-  "detektPlugins"(Plugins.detektFormatting)
 }
 
 // publish task: publishPlugins -Pgradle.publish.key=key -Pgradle.publish.secret=secret
