@@ -1,9 +1,9 @@
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
+import io.gitlab.arturbosch.detekt.Detekt
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
   alias(libs.plugins.kotlin.jvm)
-  `kotlin-dsl`
   `java-gradle-plugin`
   `maven-publish`
   alias(libs.plugins.gradle.publish)
@@ -12,7 +12,7 @@ plugins {
 }
 
 group = "de.nilsdruyen"
-version = "0.0.2"
+version = "0.0.3"
 
 repositories {
   mavenCentral()
@@ -21,32 +21,20 @@ dependencies {
   implementation(libs.hierynomusssh)
   add("detektPlugins", libs.misc.detektFormatting)
 }
-gradlePlugin {
-  plugins.register("ftpUploadPlugin") {
-    id = "de.nilsdruyen.gradle-ftp-upload-plugin"
-    implementationClass = "de.nilsdruyen.gradle.ftp.UploadPlugin"
-  }
-}
 java {
   withSourcesJar()
 }
 tasks.withType<GenerateModuleMetadata> {
   enabled = false
 }
-configure<DetektExtension> {
-  toolVersion = rootProject.libs.versions.detekt.get()
-  source = files("src/main/kotlin")
-  parallel = true
-  config = files("$rootDir/detekt-config.yml")
-  buildUponDefaultConfig = true
-  ignoreFailures = false
-  reports {
-    xml {
-      enabled = true
-      destination = file("$buildDir/reports/detekt/detekt.xml")
-    }
-    html.enabled = false
-    txt.enabled = true
+
+gradlePlugin {
+  plugins.register("ftpUploadPlugin") {
+    id = "de.nilsdruyen.gradle-ftp-upload-plugin"
+    implementationClass = "de.nilsdruyen.gradle.ftp.UploadPlugin"
+
+    displayName = "FTP Upload Gradle Plugin"
+    description = "Gradle plugin for uploading files to ftp server"
   }
 }
 
@@ -54,15 +42,25 @@ configure<DetektExtension> {
 pluginBundle {
   website = "https://github.com/nilsjr/gradle-ftp-upload-plugin"
   vcsUrl = "https://github.com/nilsjr/gradle-ftp-upload-plugin"
-  description = "Gradle plugin for uploading files to ftp server"
   tags = listOf("upload", "ftp", "file", "files")
-  (plugins) {
-    "ftpUploadPlugin" {
-      displayName = "FTP Upload Gradle Plugin"
+}
+
+configure<DetektExtension> {
+  toolVersion = rootProject.libs.versions.detekt.get()
+  source = files("src/main/kotlin")
+  parallel = true
+  config = files("$rootDir/detekt-config.yml")
+  buildUponDefaultConfig = true
+  ignoreFailures = false
+}
+
+tasks.withType<Detekt> {
+  reports {
+    xml {
+      required.set(true)
+      outputLocation.set(file("$buildDir/reports/detekt/detekt.xml"))
     }
-  }
-  mavenCoordinates {
-    groupId = "de.nilsdruyen"
-    artifactId = "gradle-ftp-upload-plugin"
+    html.required.set(false)
+    txt.required.set(true)
   }
 }
