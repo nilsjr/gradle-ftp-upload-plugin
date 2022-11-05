@@ -3,6 +3,7 @@ package de.nilsdruyen.gradle.ftp
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
+@Suppress("UNUSED")
 class UploadPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
