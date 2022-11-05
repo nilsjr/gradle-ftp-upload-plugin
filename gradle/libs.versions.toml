@@ -1,12 +1,12 @@
 [versions]
 detekt = "1.21.0"
 gradlePublish = "1.0.0"
-gradleVersions = "0.42.0"
-kotlin = "1.7.10"
+gradleVersions = "0.43.0"
+kotlin = "1.7.20"
 
 [libraries]
-hierynomusssh = { module = "com.hierynomus:sshj", version = "0.33.0" }
-misc-detektFormatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+hierynomusssh = { module = "com.hierynomus:sshj", version = "0.34.0" }
+detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 
 [plugins]
 gradle-publish = { id = "com.gradle.plugin-publish", version.ref = "gradlePublish" }

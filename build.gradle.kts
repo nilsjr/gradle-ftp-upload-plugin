@@ -1,5 +1,5 @@
-import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
@@ -17,9 +17,10 @@ version = "0.1.0"
 repositories {
   mavenCentral()
 }
+
 dependencies {
   implementation(libs.hierynomusssh)
-  add("detektPlugins", libs.misc.detektFormatting)
+  add("detektPlugins", libs.detekt.formatting)
 }
 
 java {
@@ -51,10 +52,9 @@ pluginBundle {
 }
 
 configure<DetektExtension> {
-  toolVersion = rootProject.libs.versions.detekt.get()
   source = files("src/main/kotlin")
-  parallel = true
   config = files("$rootDir/detekt-config.yml")
+  parallel = true
   buildUponDefaultConfig = true
   ignoreFailures = false
 }
@@ -66,6 +66,30 @@ tasks.withType<Detekt>().configureEach {
       outputLocation.set(file("$buildDir/reports/detekt/detekt.xml"))
     }
     html.required.set(false)
-    txt.required.set(true)
+    txt.required.set(false)
+  }
+}
+
+val deps = extensions.getByType<VersionCatalogsExtension>().named("libs")
+tasks.register<Detekt>("ktlintCheck") {
+  description = "Run detekt ktlint wrapper"
+  parallel = true
+  setSource(files(projectDir))
+  config.setFrom(files("$rootDir/detekt-formatting.yml"))
+  buildUponDefaultConfig = true
+  disableDefaultRuleSets = true
+  autoCorrect = false
+  reports {
+    xml {
+      required.set(true)
+      outputLocation.set(file("$buildDir/reports/detekt/detektFormatting.xml"))
+    }
+    html.required.set(false)
+    txt.required.set(false)
+  }
+  include(listOf("**/*.kt", "**/*.kts"))
+  exclude("build/")
+  dependencies {
+    add("detektPlugins", deps.findLibrary("detekt.formatting").get())
   }
 }
