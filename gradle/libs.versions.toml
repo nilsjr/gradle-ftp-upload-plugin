@@ -1,5 +1,5 @@
 [versions]
-detekt = "1.22.0-RC3"
+detekt = "1.22.0"
 gradlePublish = "1.1.0"
 gradleVersions = "0.44.0"
 kotlin = "1.7.20"
