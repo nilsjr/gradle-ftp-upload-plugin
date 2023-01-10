@@ -2,7 +2,7 @@
 detekt = "1.22.0"
 gradlePublish = "1.1.0"
 gradleVersions = "0.44.0"
-kotlin = "1.7.20"
+kotlin = "1.8.0"
 
 [libraries]
 hierynomusssh = { module = "com.hierynomus:sshj", version = "0.34.0" }
