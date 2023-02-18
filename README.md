@@ -1,21 +1,26 @@
 # FTP Upload Gradle Plugin
-This plugin adds an FTP upload task to your project to easily deploy static content to ftp servers. This plugin is a result while expermenting with kotlin js / compose web.
+
+This plugin adds an FTP upload task to your project to easily deploy static content to ftp servers. This plugin is a
+result while expermenting with kotlin js / compose web.
 
 ## Usage
+
 [![gradlePluginPortal](https://img.shields.io/maven-metadata/v/https/plugins.gradle.org/m2/de/nilsdruyen/gradle-ftp-upload-plugin/maven-metadata.xml.svg?label=gradlePluginPortal)](https://plugins.gradle.org/plugin/de.nilsdruyen.gradle-ftp-upload-plugin)
 
 The plugin is available from the GradlePluginPortal.
 
 ### `plugins` block:
+
 <details open>
   <summary>Kotlin</summary>
 
 ```kotlin
 // app build.gradle.kts
 plugins {
-  id("de.nilsdruyen.gradle-ftp-upload-plugin") version "0.2.0"
+  id("de.nilsdruyen.gradle-ftp-upload-plugin") version "0.3.0"
 }
 ```
+
 </details>
 
 <details>
@@ -24,13 +29,16 @@ plugins {
 ```groovy
 // app build.gradle
 plugins {
-  id 'de.nilsdruyen.gradle-ftp-upload-plugin' version '0.2.0'
+  id 'de.nilsdruyen.gradle-ftp-upload-plugin' version '0.3.0'
 }
 ```
+
 </details>
 
 ### Configuration
-The plugin automatically add the task **uploadFilesToFtp** to your project or subproject. Then you have to define following fields in the UploadExtension.
+
+The plugin automatically add the task **uploadFilesToFtp** to your project or subproject. Then you have to define
+following fields in the UploadExtension.
 
 ```kotlin
 import de.nilsdruyen.gradle.ftp.UploadExtension
@@ -46,6 +54,7 @@ configure<UploadExtension> {
 ```
 
 or use gradle properties
+
 ```kotlin
 import de.nilsdruyen.gradle.ftp.UploadExtension
 
@@ -60,6 +69,7 @@ configure<UploadExtension> {
 ```
 
 ## License
+
     The MIT License (MIT)
 
     Copyright (C) 2021 Nils Druyen
