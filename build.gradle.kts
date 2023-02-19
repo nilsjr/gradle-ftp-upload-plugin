@@ -21,6 +21,11 @@ repositories {
 dependencies {
     implementation(libs.hierynomusssh)
     add("detektPlugins", libs.detekt.formatting)
+
+    testImplementation(libs.junit.api)
+    testRuntimeOnly(libs.junit.engine)
+
+    testImplementation(libs.assertk)
 }
 
 java {
@@ -36,6 +41,9 @@ kotlin {
 
 tasks.withType<GenerateModuleMetadata> {
     enabled = false
+}
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
 
 // publish task: publishPlugins -Pgradle.publish.key=key -Pgradle.publish.secret=secret
