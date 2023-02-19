@@ -1,0 +1,15 @@
+build:
+    maxIssues: 0
+
+formatting:
+    android: true
+    Indentation:
+        active: false
+    ImportOrdering:
+        active: true
+    FinalNewline:
+        insertFinalNewLine: false
+    PackageName:
+        active: false
+    ParameterListWrapping:
+        indentSize: 2
