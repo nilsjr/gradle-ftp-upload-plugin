@@ -32,8 +32,9 @@ abstract class UploadTask : DefaultTask() {
 
     @TaskAction
     fun run() {
+        println("\uD83D\uDE80 Welcome bro, you're using upload plugin v0.4.0")
         val root = File(sourceDir.get())
-        if (root.exists()) {
+        if (root.exists() && root.isDirectory) {
             val uploader = FTPUploader(host.get(), port.get(), username.get(), password.get(), targetDir.get())
             try {
                 root.listFiles()?.toList()?.let {
@@ -43,7 +44,8 @@ abstract class UploadTask : DefaultTask() {
                 uploader.disconnect()
             }
         } else {
-            println("Source directory not exists!")
+            println("\uD83D\uDD25 Source directory not exists!")
+            println("sourceDir was (${sourceDir.get()})")
         }
     }
 

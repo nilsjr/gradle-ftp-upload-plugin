@@ -12,11 +12,7 @@ plugins {
 }
 
 group = "de.nilsdruyen"
-version = "0.3.0"
-
-repositories {
-    mavenCentral()
-}
+version = "0.4.0"
 
 dependencies {
     implementation(libs.hierynomusssh)
