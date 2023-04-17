@@ -17,7 +17,7 @@ The plugin is available from the GradlePluginPortal.
 ```kotlin
 // app build.gradle.kts
 plugins {
-  id("de.nilsdruyen.gradle-ftp-upload-plugin") version "0.3.0"
+  id("de.nilsdruyen.gradle-ftp-upload-plugin") version "0.4.0"
 }
 ```
 
@@ -29,7 +29,7 @@ plugins {
 ```groovy
 // app build.gradle
 plugins {
-  id 'de.nilsdruyen.gradle-ftp-upload-plugin' version '0.3.0'
+  id 'de.nilsdruyen.gradle-ftp-upload-plugin' version '0.4.0'
 }
 ```
 
@@ -39,6 +39,10 @@ plugins {
 
 The plugin automatically add the task **uploadFilesToFtp** to your project or subproject. Then you have to define
 following fields in the UploadExtension.
+
+
+<details open>
+  <summary>Kotlin</summary>
 
 ```kotlin
 import de.nilsdruyen.gradle.ftp.UploadExtension
@@ -52,8 +56,30 @@ configure<UploadExtension> {
   targetDir = "/folder/"
 }
 ```
+</details>
+
+<details>
+  <summary>Groovy</summary>
+
+```groovy
+import de.nilsdruyen.gradle.ftp.UploadExtension
+
+ftpUploadExtension {
+    host "example.com"
+    port 22
+    username "testuser"
+    password "test123"
+    sourceDir "${project.buildDir}/distributions"
+    targetDir "/folder/"
+}
+```
+
+</details>
 
 or use gradle properties
+
+<details open>
+  <summary>Kotlin</summary>
 
 ```kotlin
 import de.nilsdruyen.gradle.ftp.UploadExtension
@@ -67,6 +93,24 @@ configure<UploadExtension> {
   targetDir = "/folder/"
 }
 ```
+</details>
+
+<details>
+  <summary>Groovy</summary>
+
+```groovy
+import de.nilsdruyen.gradle.ftp.UploadExtension
+
+ftpUploadExtension {
+  host = findProperty("ftp.host") ?: ""
+  port = findProperty("ftp.port").toInteger() ?: 22
+  username = findProperty("ftp.username") ?: ""
+  password = findProperty("ftp.password") ?: ""
+  sourceDir = "${project.buildDir}/distributions"
+  targetDir = "/folder/"
+}
+```
+</details>
 
 ## License
 
