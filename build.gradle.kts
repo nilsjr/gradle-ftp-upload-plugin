@@ -44,21 +44,22 @@ tasks.withType<Test> {
 
 // publish task: publishPlugins -Pgradle.publish.key=key -Pgradle.publish.secret=secret
 gradlePlugin {
-    website.set("https://github.com/nilsjr/gradle-ftp-upload-plugin")
-    vcsUrl.set("https://github.com/nilsjr/gradle-ftp-upload-plugin.git")
     plugins.register("ftpUploadPlugin") {
         id = "de.nilsdruyen.gradle-ftp-upload-plugin"
         implementationClass = "de.nilsdruyen.gradle.ftp.UploadPlugin"
 
         displayName = "FTP Upload Gradle Plugin"
         description = "Gradle plugin for uploading files to ftp server"
-        tags.set(listOf("\"upload\", \"ftp\", \"file\", \"files\""))
+
+        website.set("https://github.com/nilsjr/gradle-ftp-upload-plugin")
+        vcsUrl.set("https://github.com/nilsjr/gradle-ftp-upload-plugin")
+        tags.set(listOf("upload", "ftp", "file", "files"))
     }
 }
 
 configure<DetektExtension> {
-    source = files("src/main/kotlin")
-    config = files("$rootDir/detekt-config.yml")
+    source.from(files("src/main/kotlin"))
+    config.from(files("$rootDir/detekt-config.yml"))
     parallel = true
     buildUponDefaultConfig = true
     ignoreFailures = false
@@ -75,7 +76,7 @@ tasks.withType<Detekt>().configureEach {
     }
 }
 
-val deps = extensions.getByType<VersionCatalogsExtension>().named("libs")
+val deps: VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
 tasks.register<Detekt>("ktlintCheck") {
     description = "Run detekt ktlint wrapper"
     parallel = true
