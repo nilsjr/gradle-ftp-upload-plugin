@@ -1,5 +1,5 @@
 [versions]
-detekt = "1.23.0"
+detekt = "1.23.1"
 gradlePublish = "1.2.0"
 gradleVersions = "0.47.0"
 junit = "5.10.0"
