@@ -1,6 +1,6 @@
 [versions]
 detekt = "1.23.1"
-gradlePublish = "1.2.0"
+gradlePublish = "1.2.1"
 gradleVersions = "0.47.0"
 junit = "5.10.0"
 kotlin = "1.9.0"
