@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.gradle.publish)
     alias(libs.plugins.misc.gradleVersions)
     alias(libs.plugins.misc.detekt)
+    id("org.jetbrains.changelog") version "2.2.0"
 }
 
 group = "de.nilsdruyen"
@@ -98,4 +99,10 @@ tasks.register<Detekt>("ktlintCheck") {
     dependencies {
         add("detektPlugins", deps.findLibrary("detekt.formatting").get())
     }
+}
+
+changelog {
+    unreleasedTerm.set("next")
+    groups.empty()
+    repositoryUrl.set("https://github.com/nilsjr/gradle-ftp-upload-plugin")
 }
