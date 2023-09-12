@@ -69,7 +69,7 @@ tasks.withType<Detekt>().configureEach {
     reports {
         xml {
             required.set(true)
-            outputLocation.set(file("$buildDir/reports/detekt/detekt.xml"))
+            outputLocation.set(file("${layout.buildDirectory}/reports/detekt/detekt.xml"))
         }
         html.required.set(false)
         txt.required.set(false)
@@ -88,7 +88,7 @@ tasks.register<Detekt>("ktlintCheck") {
     reports {
         xml {
             required.set(true)
-            outputLocation.set(file("$buildDir/reports/detekt/detektFormatting.xml"))
+            outputLocation.set(file("${layout.buildDirectory}/reports/detekt/detektFormatting.xml"))
         }
         html.required.set(false)
         txt.required.set(false)
