@@ -17,7 +17,7 @@ The plugin is available from the GradlePluginPortal.
 ```kotlin
 // app build.gradle.kts
 plugins {
-  id("de.nilsdruyen.gradle-ftp-upload-plugin") version "0.4.0"
+  id("de.nilsdruyen.gradle-ftp-upload-plugin") version "0.4.1"
 }
 ```
 
@@ -29,7 +29,7 @@ plugins {
 ```groovy
 // app build.gradle
 plugins {
-  id 'de.nilsdruyen.gradle-ftp-upload-plugin' version '0.4.0'
+  id 'de.nilsdruyen.gradle-ftp-upload-plugin' version '0.4.1'
 }
 ```
 
