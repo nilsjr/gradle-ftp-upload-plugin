@@ -12,7 +12,7 @@ plugins {
 }
 
 group = "de.nilsdruyen"
-version = "0.4.0"
+version = "0.4.1"
 
 dependencies {
     implementation(libs.hierynomusssh)
@@ -27,12 +27,12 @@ dependencies {
 java {
     withSourcesJar()
     withJavadocJar()
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 kotlin {
-    jvmToolchain(11)
+    jvmToolchain(17)
 }
 
 tasks.withType<GenerateModuleMetadata> {
@@ -44,21 +44,22 @@ tasks.withType<Test> {
 
 // publish task: publishPlugins -Pgradle.publish.key=key -Pgradle.publish.secret=secret
 gradlePlugin {
-    website.set("https://github.com/nilsjr/gradle-ftp-upload-plugin")
-    vcsUrl.set("https://github.com/nilsjr/gradle-ftp-upload-plugin.git")
     plugins.register("ftpUploadPlugin") {
         id = "de.nilsdruyen.gradle-ftp-upload-plugin"
         implementationClass = "de.nilsdruyen.gradle.ftp.UploadPlugin"
 
         displayName = "FTP Upload Gradle Plugin"
         description = "Gradle plugin for uploading files to ftp server"
-        tags.set(listOf("\"upload\", \"ftp\", \"file\", \"files\""))
+
+        website.set("https://github.com/nilsjr/gradle-ftp-upload-plugin")
+        vcsUrl.set("https://github.com/nilsjr/gradle-ftp-upload-plugin")
+        tags.set(listOf("upload", "ftp", "file", "files"))
     }
 }
 
 configure<DetektExtension> {
-    source = files("src/main/kotlin")
-    config = files("$rootDir/detekt-config.yml")
+    source.from(layout.projectDirectory.files("src/main/kotlin"))
+    config.from(layout.projectDirectory.file("detekt-config.yml"))
     parallel = true
     buildUponDefaultConfig = true
     ignoreFailures = false
@@ -68,26 +69,26 @@ tasks.withType<Detekt>().configureEach {
     reports {
         xml {
             required.set(true)
-            outputLocation.set(file("$buildDir/reports/detekt/detekt.xml"))
+            outputLocation.set(layout.buildDirectory.file("reports/detekt/detekt.xml"))
         }
         html.required.set(false)
         txt.required.set(false)
     }
 }
 
-val deps = extensions.getByType<VersionCatalogsExtension>().named("libs")
+val deps: VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
 tasks.register<Detekt>("ktlintCheck") {
     description = "Run detekt ktlint wrapper"
     parallel = true
-    setSource(files(projectDir))
-    config.setFrom(files("$rootDir/detekt-formatting.yml"))
+    setSource(layout.projectDirectory)
+    config.setFrom(layout.projectDirectory.file("detekt-formatting.yml"))
     buildUponDefaultConfig = true
     disableDefaultRuleSets = true
     autoCorrect = false
     reports {
         xml {
             required.set(true)
-            outputLocation.set(file("$buildDir/reports/detekt/detektFormatting.xml"))
+            outputLocation.set(layout.buildDirectory.file("reports/detekt/detektFormatting.xml"))
         }
         html.required.set(false)
         txt.required.set(false)

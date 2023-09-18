@@ -1,16 +1,16 @@
 [versions]
-detekt = "1.22.0"
-gradlePublish = "1.2.0"
-gradleVersions = "0.46.0"
-junit = "5.9.2"
-kotlin = "1.8.20"
+detekt = "1.23.1"
+gradlePublish = "1.2.1"
+gradleVersions = "0.48.0"
+junit = "5.10.0"
+kotlin = "1.9.10"
 
 [libraries]
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
-hierynomusssh = { module = "com.hierynomus:sshj", version = "0.35.0" }
+hierynomusssh = { module = "com.hierynomus:sshj", version = "0.36.0" }
 junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
 junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
-assertk = "com.willowtreeapps.assertk:assertk-jvm:0.25"
+assertk = "com.willowtreeapps.assertk:assertk-jvm:0.27.0"
 
 [plugins]
 gradle-publish = { id = "com.gradle.plugin-publish", version.ref = "gradlePublish" }

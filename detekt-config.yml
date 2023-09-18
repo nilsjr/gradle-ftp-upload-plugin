@@ -2,7 +2,7 @@ build:
     maxIssues: 5
 
 complexity:
-    ComplexMethod:
+    CyclomaticComplexMethod:
         ignoreSingleWhenExpression: true
 
 empty-blocks:
