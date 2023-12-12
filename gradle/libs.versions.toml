@@ -6,7 +6,7 @@ junit = "5.10.1"
 kotlin = "1.9.21"
 
 [libraries]
-assertk = "com.willowtreeapps.assertk:assertk-jvm:0.27.0"
+assertk = "com.willowtreeapps.assertk:assertk-jvm:0.28.0"
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 hierynomusssh = { module = "com.hierynomus:sshj", version = "0.37.0" }
 junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
