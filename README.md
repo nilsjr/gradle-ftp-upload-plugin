@@ -54,6 +54,7 @@ configure<UploadExtension> {
   password = "test123"
   sourceDir = "${project.buildDir}/distributions"
   targetDir = "/folder/"
+  clearDirectoryBeforeUpload = true || false
 }
 ```
 </details>
@@ -71,6 +72,7 @@ ftpUploadExtension {
     password "test123"
     sourceDir "${project.buildDir}/distributions"
     targetDir "/folder/"
+    clearDirectoryBeforeUpload true / false
 }
 ```
 
