@@ -7,4 +7,5 @@ open class UploadExtension {
     var password = ""
     var sourceDir = ""
     var targetDir = ""
+    var clearDirectoryBeforeUpload = false
 }
