@@ -12,7 +12,7 @@ plugins {
 }
 
 group = "de.nilsdruyen"
-version = "0.4.2"
+version = "0.5.0"
 
 dependencies {
     implementation(libs.hierynomusssh)
@@ -27,12 +27,12 @@ dependencies {
 java {
     withSourcesJar()
     withJavadocJar()
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 tasks.withType<GenerateModuleMetadata> {
