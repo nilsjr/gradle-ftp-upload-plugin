@@ -25,7 +25,7 @@ abstract class UploadTask : DefaultTask() {
             try {
                 connection.with {
                     root.listFiles()?.toList()?.let {
-                        upload(it, ext.targetDir,  ext.clearDirectoryBeforeUpload)
+                        upload(it, ext.targetDir, ext.clearDirectoryBeforeUpload)
                     }
                 }
             } finally {
@@ -37,9 +37,8 @@ abstract class UploadTask : DefaultTask() {
         }
     }
 
-
     @Throws(IllegalStateException::class)
-    fun SFTPClient.upload(files: List<File>, targetDirectory: String,  clearDirectoryBeforeUpload: Boolean) {
+    fun SFTPClient.upload(files: List<File>, targetDirectory: String, clearDirectoryBeforeUpload: Boolean) {
         if (clearDirectoryBeforeUpload) cleanTargetDirectory(this, targetDirectory)
         upload(files, targetDirectory, this)
     }
