@@ -16,6 +16,7 @@ version = "0.5.0"
 
 dependencies {
     implementation(libs.hierynomusssh)
+
     add("detektPlugins", libs.detekt.formatting)
 
     testImplementation(libs.junit.api)
@@ -76,7 +77,7 @@ tasks.withType<Detekt>().configureEach {
     }
 }
 
-val deps: VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
+private val deps: VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
 tasks.register<Detekt>("ktlintCheck") {
     description = "Run detekt ktlint wrapper"
     parallel = true
