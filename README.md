@@ -17,7 +17,7 @@ The plugin is available from the GradlePluginPortal.
 ```kotlin
 // app build.gradle.kts
 plugins {
-  id("de.nilsdruyen.gradle-ftp-upload-plugin") version "0.4.1"
+  id("de.nilsdruyen.gradle-ftp-upload-plugin") version "0.4.2"
 }
 ```
 
@@ -29,7 +29,7 @@ plugins {
 ```groovy
 // app build.gradle
 plugins {
-  id 'de.nilsdruyen.gradle-ftp-upload-plugin' version '0.4.1'
+  id 'de.nilsdruyen.gradle-ftp-upload-plugin' version '0.4.2'
 }
 ```
 
@@ -54,6 +54,7 @@ configure<UploadExtension> {
   password = "test123"
   sourceDir = "${project.buildDir}/distributions"
   targetDir = "/folder/"
+  clearDirectoryBeforeUpload = true || false
 }
 ```
 </details>
@@ -71,6 +72,7 @@ ftpUploadExtension {
     password "test123"
     sourceDir "${project.buildDir}/distributions"
     targetDir "/folder/"
+    clearDirectoryBeforeUpload true / false
 }
 ```
 
