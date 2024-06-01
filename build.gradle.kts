@@ -16,6 +16,7 @@ version = "0.4.2"
 
 dependencies {
     implementation(libs.hierynomusssh)
+
     add("detektPlugins", libs.detekt.formatting)
 
     testImplementation(libs.junit.api)
@@ -27,12 +28,12 @@ dependencies {
 java {
     withSourcesJar()
     withJavadocJar()
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 tasks.withType<GenerateModuleMetadata> {
@@ -76,7 +77,7 @@ tasks.withType<Detekt>().configureEach {
     }
 }
 
-val deps: VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
+private val deps: VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
 tasks.register<Detekt>("ktlintCheck") {
     description = "Run detekt ktlint wrapper"
     parallel = true
