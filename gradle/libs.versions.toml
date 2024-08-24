@@ -3,7 +3,7 @@ detekt = "1.23.6"
 gradlePublish = "1.2.1"
 gradleVersions = "0.51.0"
 junit = "5.11.0"
-kotlin = "2.0.10"
+kotlin = "2.0.20"
 
 [libraries]
 assertk = "com.willowtreeapps.assertk:assertk-jvm:0.28.1"
