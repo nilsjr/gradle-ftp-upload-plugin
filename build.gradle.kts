@@ -1,3 +1,4 @@
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 
@@ -18,8 +19,10 @@ dependencies {
 
     add("detektPlugins", libs.detekt.formatting)
 
+    testImplementation(platform(libs.junit.bom))
     testImplementation(libs.junit.api)
     testRuntimeOnly(libs.junit.engine)
+    testRuntimeOnly(libs.junit.platform.launcher)
 
     testImplementation(libs.assertk)
 }
@@ -97,5 +100,18 @@ tasks.register<Detekt>("ktlintCheck") {
     exclude("build/")
     dependencies {
         add("detektPlugins", deps.findLibrary("detekt.formatting").get())
+    }
+}
+
+fun isNonStable(version: String): Boolean {
+    val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.uppercase().contains(it) }
+    val regex = "^[0-9,.v-]+(-r)?$".toRegex()
+    val isStable = stableKeyword || regex.matches(version)
+    return isStable.not()
+}
+
+tasks.withType<DependencyUpdatesTask> {
+    rejectVersionIf {
+        isNonStable(candidate.version)
     }
 }
