@@ -12,7 +12,7 @@ plugins {
 }
 
 group = "de.nilsdruyen"
-version = "0.5.0"
+version = "0.5.1"
 
 dependencies {
     implementation(libs.hierynomusssh)
