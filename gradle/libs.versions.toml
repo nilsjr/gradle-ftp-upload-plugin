@@ -2,7 +2,7 @@
 detekt = "1.23.8"
 gradlePublish = "2.0.0"
 gradleVersions = "0.53.0"
-junit = "5.13.4"
+junit = "5.14.0"
 kotlin = "2.2.20"
 
 [libraries]
