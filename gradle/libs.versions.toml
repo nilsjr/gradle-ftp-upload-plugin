@@ -2,7 +2,7 @@
 assertk = "0.28.1"
 detekt = "1.23.8"
 gradlePublish = "2.0.0"
-gradleVersions = "0.53.0"
+gradleVersions = "0.52.0"
 hierynomusssh = "0.40.0"
 junit = "6.0.1"
 kotlin = "2.2.21"

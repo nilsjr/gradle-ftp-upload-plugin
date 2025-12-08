@@ -27,6 +27,8 @@ jobs:
                 with:
                     distribution: 'zulu'
                     java-version: '17'
+            -   name: Setup Gradle
+                uses: gradle/actions/setup-gradle@4d9f0ba0025fe599b4ebab900eb7f3a1d93ef4c2 # v5
             -   name: Run detekt with ktlint
                 run: ./gradlew detekt ktlintCheck
 
@@ -40,6 +42,7 @@ jobs:
                 with:
                     distribution: 'zulu'
                     java-version: '17'
-
+            - name: Setup Gradle
+              uses: gradle/actions/setup-gradle@4d9f0ba0025fe599b4ebab900eb7f3a1d93ef4c2 # v5
             -   name: Test and Build
                 run: ./gradlew build
