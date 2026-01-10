@@ -5,7 +5,7 @@ gradlePublish = "2.0.0"
 gradleVersions = "0.52.0"
 hierynomusssh = "0.40.0"
 junit = "6.0.2"
-kotlin = "2.2.21"
+kotlin = "2.3.0"
 
 [libraries]
 assertk = { module = "com.willowtreeapps.assertk:assertk-jvm", version.ref = "assertk" }
