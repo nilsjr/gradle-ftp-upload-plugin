@@ -1,33 +1,45 @@
 {
-  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
   extends: [
-    'config:best-practices',
-    ':automergePatch',
-    ':automergeDigest',
-    ':automergeBranch',
+    "config:best-practices",
+    ":dependencyDashboard",
+    ":semanticCommits",
   ],
-  baseBranchPatterns: [
-    'develop'
-  ],
-  schedule: [
-    'before 5am on saturday',
-  ],
+  timezone: "Europe/Berlin",
+  schedule: ["before 5am on saturday"],
+  labels: ["dependencies"],
+  platformAutomerge: true,
+
+  // Keep the lockfile fresh and automerge those refreshes too.
+  lockFileMaintenance: {
+    enabled: true,
+    automerge: true,
+    schedule: ["before 5am on saturday"],
+  },
+
   packageRules: [
     {
-      groupName: 'Kotlin and KSP',
+      groupName: "Kotlin and KSP",
       matchPackageNames: [
-        '/^org.jetbrains.kotlin/',
-        '/^com.google.devtools.ksp/',
-      ]
+        "/^org.jetbrains.kotlin/",
+        "/^com.google.devtools.ksp/",
+      ],
     },
     {
-      description: 'Automerge non-major updates',
-      matchUpdateTypes: [
-        'patch',
-        'minor'
-      ],
-      minimumReleaseAge: '3 days',
-      automerge: true
-    }
-  ]
+      // Automerge minor/patch (and pin/digest) once CI passes; majors stay manual.
+      matchUpdateTypes: ["minor", "patch", "pin", "digest"],
+      automerge: true,
+    },
+    {
+      // Bundle all non-major updates into a single PR to cut down on noise.
+      matchUpdateTypes: ["minor", "patch"],
+      groupName: "all non-major dependencies",
+      groupSlug: "all-minor-patch",
+    },
+    {
+      // Major updates require manual approval via the Dependency Dashboard.
+      matchUpdateTypes: ["major"],
+      dependencyDashboardApproval: true,
+    },
+  ],
 }
