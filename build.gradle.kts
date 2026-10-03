@@ -16,6 +16,11 @@ version = "0.5.1"
 
 dependencies {
     implementation(libs.hierynomusssh)
+    // sshj 0.41.1 still ships BouncyCastle 1.84 (GHSA-9pwp-9qqc-pr26, GHSA-qp49-qgx5-5m26, fixed in 1.85).
+    // Declared directly instead of as a constraint so the bump reaches consumers via the published POM.
+    // Remove once sshj depends on bcprov >= 1.85.
+    runtimeOnly(libs.bouncycastle.bcprov)
+    runtimeOnly(libs.bouncycastle.bcpkix)
 
     add("detektPlugins", libs.detekt.formatting)
 
