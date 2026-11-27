@@ -16,6 +16,14 @@ version = "0.5.1"
 
 dependencies {
     implementation(libs.hierynomusssh)
+    // TODO: Remove these constraints once sshj > 0.41.2 is released (bumps Bouncy Castle to 1.87,
+    //  see hierynomus/sshj#1079). sshj#1006 makes Bouncy Castle optional, so after upgrading check
+    //  whether it must be added as a direct dependency.
+    constraints {
+        implementation(libs.bouncycastle.bcprov) { because("Fix known vulnerabilities in transitive Bouncy Castle from sshj") }
+        implementation(libs.bouncycastle.bcpkix) { because("Keep Bouncy Castle modules aligned") }
+        implementation(libs.bouncycastle.bcutil) { because("Keep Bouncy Castle modules aligned") }
+    }
 
     add("detektPlugins", libs.detekt.formatting)
 
