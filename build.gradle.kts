@@ -16,6 +16,11 @@ version = "0.5.1"
 
 dependencies {
     implementation(libs.hierynomusssh)
+    constraints {
+        implementation(libs.bouncycastle.bcprov) { because("Fix known vulnerabilities in transitive Bouncy Castle from sshj") }
+        implementation(libs.bouncycastle.bcpkix) { because("Keep Bouncy Castle modules aligned") }
+        implementation(libs.bouncycastle.bcutil) { because("Keep Bouncy Castle modules aligned") }
+    }
 
     add("detektPlugins", libs.detekt.formatting)
 
